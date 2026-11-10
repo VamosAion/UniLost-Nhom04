@@ -1,0 +1,15 @@
+# UniLost v2.9.4 - cloud deployment exclusions
+**/node_modules/
+**/dist/
+**/coverage/
+**/uploads/
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+!**/.env.cloud.example
+.vercel/
+*.log
+.cloud_step1_backup_*/

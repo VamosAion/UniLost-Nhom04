@@ -1,0 +1,10 @@
+import{clean,validDntuEmail,validPhone,normalizeDntuEmail,hasProhibitedLanguage}from'../src/utils.js';
+test('chấp nhận email sinh viên DNTU',()=>expect(validDntuEmail('1822030487@dntu.edu.vn')).toBe(true));
+test('từ chối email bên ngoài',()=>expect(validDntuEmail('student@gmail.com')).toBe(false));
+test('loại bỏ thẻ HTML khỏi dữ liệu nhập',()=>expect(clean('<script>alert(1)</script>Ví màu đen')).toBe('alert(1)Ví màu đen'));
+test('chấp nhận số điện thoại đủ 10 số và đúng đầu số',()=>expect(validPhone('0321234567')).toBe(true));
+test('chấp nhận đầu số 085',()=>expect(validPhone('0851234567')).toBe(true));
+test('từ chối số điện thoại sai đầu số hoặc độ dài',()=>{expect(validPhone('0901234567')).toBe(false);expect(validPhone('032123456')).toBe(false);});
+test('tự thêm tên miền DNTU khi chỉ nhập mã sinh viên',()=>expect(normalizeDntuEmail('1822030487')).toBe('1822030487@dntu.edu.vn'));
+test('giữ nguyên email đã có tên miền',()=>expect(normalizeDntuEmail('1822030487@dntu.edu.vn')).toBe('1822030487@dntu.edu.vn'));
+test('chặn một số ngôn từ không phù hợp phổ biến',()=>{expect(hasProhibitedLanguage('nội dung fucking')).toBe(true);expect(hasProhibitedLanguage('Tôi nhặt được ví ở thư viện')).toBe(false);});
